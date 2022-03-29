@@ -1,6 +1,5 @@
 package com.cg.ams.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,92 +8,72 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.cg.ams.dto.AssignFacultyInputDTO;
-import com.cg.ams.dto.AssignFacultyOutputDTO;
 import com.cg.ams.entity.AssignFacultyEntity;
 import com.cg.ams.exception.DuplicateRecordException;
 import com.cg.ams.exception.RecordNotFoundException;
-import com.cg.ams.repository.IAssignFacultyRepository;
+import com.cg.ams.repository.AssignFacultyRepository;
 
 @Service
 public class AssignFacultyServiceImpl implements IAssignFacultyService {
 
 	@Autowired
-	IAssignFacultyRepository afRep;
+	AssignFacultyRepository afRep;
 
-	private String message = "Cannot find faculty record with id: ";
-	
 	@Override
-	public long add(AssignFacultyInputDTO afInDTO) {
-		AssignFacultyEntity entity = new AssignFacultyEntity(afInDTO);
+	public long add(AssignFacultyEntity entity) {
 		Optional<AssignFacultyEntity> afe = afRep.findById(entity.getId());
 		if (afe.isPresent()) {
-			throw new DuplicateRecordException("The faculty with id: " + entity.getId() + " already exists!");
+			throw new DuplicateRecordException("The entity with id: " + entity.getId() + " already exists!");
 		}
 		afRep.save(entity);
 		return entity.getId();
 	}
 
 	@Override
-	public void update(AssignFacultyInputDTO afInDTO) {
-		AssignFacultyEntity entity = new AssignFacultyEntity(afInDTO);
+	public void update(AssignFacultyEntity entity) {
 		Optional<AssignFacultyEntity> afe = afRep.findById(entity.getId());
 		if (!afe.isPresent()) {
-			throw new RecordNotFoundException(message + entity.getId());
+			throw new RecordNotFoundException("The faculty record with id: " + entity.getId() + " is not found!");
 		}
 		afRep.save(entity);
 	}
 
 	@Override
-	public void delete(AssignFacultyInputDTO afInDTO) {
-		AssignFacultyEntity entity = new AssignFacultyEntity(afInDTO);
-		afRep.findById(entity.getId()).orElseThrow(
-				() -> new RecordNotFoundException(message + entity.getId()));
+	public void delete(AssignFacultyEntity entity) {
+		Optional<AssignFacultyEntity> assignFaculty = afRep.findById(entity.getId());
+		if (assignFaculty.isEmpty())
+			throw new RecordNotFoundException("The faculty record with id: " + entity.getId() + " is not found!");
 
 		afRep.deleteById(entity.getId());
 	}
 
 	@Override
-	public AssignFacultyOutputDTO findByName(String name) {
+	public AssignFacultyEntity findByName(String name) {
 		Optional<AssignFacultyEntity> afe = Optional.ofNullable(afRep.findByUserName(name));
 		if (!afe.isPresent()) {
-			throw new RecordNotFoundException("The faculty with userName: "+name+" does not exist!");
+			throw new RecordNotFoundException("The faculty record with name: " + name + " is not found!");
 		}
-		AssignFacultyOutputDTO afOutDTO = new AssignFacultyOutputDTO(afe.get());
-		return afOutDTO;
+		return afe.get();
 	}
 
 	@Override
-	public AssignFacultyOutputDTO findByPk(long id) {
+	public AssignFacultyEntity findByPk(long id) {
 		Optional<AssignFacultyEntity> afe = afRep.findById(id);
 		if (!afe.isPresent()) {
-			throw new RecordNotFoundException(message + id);
+			throw new RecordNotFoundException("The faculty record with id: " + id + " is not found!");
 		}
-		AssignFacultyOutputDTO afOutDTO = new AssignFacultyOutputDTO(afe.get());
-		return afOutDTO;
+		return afe.get();
 	}
 
 	@Override
-	public List<AssignFacultyOutputDTO> search(AssignFacultyInputDTO afInDTO, long pageNo, int pageSize) {
+	public List<AssignFacultyEntity> search(AssignFacultyEntity entity, long pageNo, int pageSize) {
 		Pageable pageable = PageRequest.of((int) pageNo, pageSize);
-		AssignFacultyEntity entity = new AssignFacultyEntity(afInDTO);
-		List<AssignFacultyEntity> al = afRep.findByUserNameIgnoreCase(entity.getUserName(), pageable);
-		List<AssignFacultyOutputDTO> al1 = new ArrayList<>();
-		for(AssignFacultyEntity afe : al) {
-			al1.add(new AssignFacultyOutputDTO(afe));
-		}
-		return al1;
+		return afRep.findByUserNameIgnoreCase(entity.getUserName(), pageable);
 	}
 
 	@Override
-	public List<AssignFacultyOutputDTO> search(AssignFacultyInputDTO afInDTO) {
-		AssignFacultyEntity entity = new AssignFacultyEntity(afInDTO);
-		List<AssignFacultyEntity> al = afRep.findByUserNameIgnoreCase(entity.getUserName());
-		List<AssignFacultyOutputDTO> al1 = new ArrayList<>();
-		for(AssignFacultyEntity afe : al) {
-			al1.add(new AssignFacultyOutputDTO(afe));
-		}
-		return al1;
+	public List<AssignFacultyEntity> search(AssignFacultyEntity entity) {
+		return afRep.findByUserNameIgnoreCase(entity.getUserName());
 	}
 
 }

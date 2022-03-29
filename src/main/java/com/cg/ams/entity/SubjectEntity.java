@@ -47,8 +47,5 @@ public class SubjectEntity {
 
 	@ManyToOne(cascade = CascadeType.ALL)
     private CourseEntity course;
-    
-
-
 
 }
