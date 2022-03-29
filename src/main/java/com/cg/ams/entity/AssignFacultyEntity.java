@@ -26,28 +26,6 @@ public class AssignFacultyEntity {
 
     @Id
     private long id;
-
-//    @NotNull(message = "User Id shouldn't be empty!")
-//    private long userId;
-//
-//    @NotEmpty(message = "User name shouldn't be empty!")
-//    @Length(min = 8, max = 100, message = "User name length should be between 8 and 100")
-//    private String userName;
-
-//    @NotNull
-//    private long courseId;
-//
-//    @NotEmpty(message = "Course name shouldn't be empty!")
-//    @Length(min = 8, max = 100, message = "Course name should be between 8 and 100")
-//    private String courseName;
-//
-//    @NotNull
-//    private long subjectId;
-//
-//    @NotEmpty(message = "Subject name shouldn't be empty!")
-//    @Length(min = 8, max = 100, message = "Subject name should be between 8 and 100")
-//    private String subjectName;
-//    private String semester;
     
     @NotEmpty(message="Username shouldn't be empty")
     private String userName;
@@ -58,7 +36,7 @@ public class AssignFacultyEntity {
     @OneToOne(cascade = CascadeType.ALL)
     private UserEntity user;
     
-    @ManyToMany(fetch = FetchType.LAZY,targetEntity=SubjectEntity.class, cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH})
+    @ManyToMany(fetch = FetchType.LAZY,targetEntity=SubjectEntity.class, cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH,CascadeType.REMOVE})
     @JoinTable(name="Faculty_Subjects", 
             joinColumns=   { @JoinColumn(name="faculty_id") },
             inverseJoinColumns= { @JoinColumn(name="subject_id")} )
