@@ -11,9 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
-
 import com.cg.ams.dto.UserInputDTO;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,7 +30,6 @@ import lombok.NoArgsConstructor;
 public class UserEntity {
 
 	@Id
-//	@GeneratedValue
 	private long id;
 
 	private String firstName;
@@ -68,6 +65,7 @@ public class UserEntity {
 		this.gender = userInputDTO.getGender();
 
 		this.profilePic = userInputDTO.getProfilePic();
+		this.role = userInputDTO.getRole();
 	}
 
 }

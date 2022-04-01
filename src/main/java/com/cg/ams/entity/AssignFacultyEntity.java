@@ -40,7 +40,7 @@ public class AssignFacultyEntity {
 	private long courseId;
 	private String courseName;
 
-	@OneToOne(cascade = CascadeType.MERGE)
+	@OneToOne(cascade = CascadeType.ALL)
 	private UserEntity user;
 
 	@ManyToMany(fetch = FetchType.EAGER, targetEntity = SubjectEntity.class, cascade = { CascadeType.MERGE,

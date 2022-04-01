@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-@Disabled
+//@Disabled
 class CourseServiceTest {
 
     @Autowired
@@ -20,7 +20,7 @@ class CourseServiceTest {
 
     // Add Course Entity
     @Test
-    void addCourse() {
+    void addCourseTest() {
         CourseEntity course = new CourseEntity(93, "Python", "Python is a Programming Language");
         String s = courseServ.add(course);
         assertEquals("Course Added Successfully", s);
@@ -28,23 +28,24 @@ class CourseServiceTest {
 
     // Update Course Entity
     @Test
-    void updateCourse() {
-        CourseEntity course = new CourseEntity(104, "Cricket", "Cricket is a Sport");
+    void updateCourseTest() {
+        CourseEntity course = new CourseEntity(93, "Cricket", "Cricket is a Sport");
         CourseEntity result = courseServ.update(course);
         assertEquals("Cricket", result.getName());
     }
 
     // Update Course Name by Id
     @Test
-    void updateNameById() {
-        CourseEntity course = courseServ.updateNameById(105, "Android");
-        assertEquals("Java ia a Progtramming Language", course.getDescription());
+    void updateNameByIdTest() {
+        CourseEntity course = courseServ.updateNameById(93, "Sport");
+        assertEquals("Cricket is a Sport", course.getDescription());
     }
 
     // Delete Course Entity
     @Test
-    void deleteCourse() {
-        CourseEntity course = new CourseEntity(108, "Python", "Python is a Programming Language");
+    @Disabled
+    void deleteCourseTest() {
+        CourseEntity course = new CourseEntity(93, "Python", "Python is a Programming Language");
         CourseEntity result = courseServ.delete(course);
         assertEquals("Python", result.getName());
         assertEquals("Python ia a Programming Language", result.getDescription());
@@ -53,37 +54,39 @@ class CourseServiceTest {
 
     // Get Course Entity by Name
     @Test
-    void getByName() {
-        CourseEntity course = courseServ.findByName("CSS");
-        assertEquals(101, course.getId());
+    void getByNameTest() {
+        CourseEntity course = courseServ.findByName("Python");
+        assertEquals(93, course.getId());
     }
 
     // Get Course Entity By Id
     @Test
-    void getById() {
-        CourseEntity course = courseServ.findById(100);
-        assertEquals("Html", course.getName());
+    void getByIdTest() {
+        CourseEntity course = courseServ.findById(93);
+        assertEquals("Python", course.getName());
     }
 
     // Delete Course By Name
     @Test
-    void deleteByName() {
+    @Disabled
+    void deleteByNameTest() {
         CourseEntity course = courseServ.deleteByName("Cricket");
         assertEquals(104, course.getId());
     }
 
     // Delete Course By Id
     @Test
+    //@Disabled
     void deleteById() {
-        CourseEntity course = courseServ.deleteById(103);
-        assertEquals("HTML", course.getName());
+        CourseEntity course = courseServ.deleteById(93);
+        assertEquals("Sport", course.getName());
     }
 
     // List All Courses
     @Test
-    void getAllCourses() {
+    void getAllCoursesTest() {
         List<CourseEntity> courseList = courseServ.getAllCourses();
-        assertEquals(6, courseList.size());
+        assertEquals(5, courseList.size());
     }
 
 }
