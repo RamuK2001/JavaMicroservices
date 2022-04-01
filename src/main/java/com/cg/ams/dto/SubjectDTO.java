@@ -4,10 +4,8 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import com.cg.ams.entity.CourseEntity;
 import com.cg.ams.entity.SubjectEntity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

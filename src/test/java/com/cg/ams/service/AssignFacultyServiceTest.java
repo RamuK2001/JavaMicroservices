@@ -35,7 +35,7 @@ public class AssignFacultyServiceTest {
 	@Test
 	//@Disabled
 	public void addTest() throws Exception {
-		UserInputDTO userInDTO = new UserInputDTO(1L,"firstName1","lastName1","login1",
+		UserInputDTO userInDTO = new UserInputDTO(1L,"firstName1","lastName1","Login1",
 				"password1","password1",new SimpleDateFormat("yyyy-MM-dd").parse("1988-01-29T11:04:54.511Z"),
 				"mobileNo1","gender1","profilePic1",1L);
 		CourseInputDTO c1 = new CourseInputDTO(101,"name1","description1");
@@ -73,7 +73,7 @@ public class AssignFacultyServiceTest {
 	@Test
 	//@Disabled
 	public void updateTest() throws Exception {
-		UserInputDTO userInDTO = new UserInputDTO(1L,"f-Name1","l-Name1","login1",
+		UserInputDTO userInDTO = new UserInputDTO(1L,"f-Name1","l-Name1","Login1",
 				"password1","password1",new SimpleDateFormat("yyyy-MM-dd").parse("1988-01-29T11:04:54.511Z"),
 				"mobileNo1","gender1","profilePic1",11L);
 		CourseInputDTO c1 = new CourseInputDTO(101,"name1","description1");
@@ -94,7 +94,7 @@ public class AssignFacultyServiceTest {
 	@Test
 	//@Disabled
 	public void searchByPagesTest() throws Exception {
-		UserInputDTO userInDTO = new UserInputDTO(1L,"firstName1","lastName1","login1",
+		UserInputDTO userInDTO = new UserInputDTO(1L,"firstName1","lastName1","Login1",
 				"password1","password1",new SimpleDateFormat("yyyy-MM-dd").parse("1988-01-29T11:04:54.511Z"),
 				"mobileNo1","gender1","profilePic1",11L);
 		CourseInputDTO c1 = new CourseInputDTO(101,"name1","description1");
@@ -113,7 +113,7 @@ public class AssignFacultyServiceTest {
 	@Test
 	//@Disabled
 	public void searchTest() throws Exception {
-		UserInputDTO userInDTO = new UserInputDTO(1L,"firstName1","lastName1","login1",
+		UserInputDTO userInDTO = new UserInputDTO(1L,"firstName1","lastName1","Login1",
 				"password1","password1",new SimpleDateFormat("yyyy-MM-dd").parse("1988-01-29T11:04:54.511Z"),
 				"mobileNo1","gender1","profilePic1",11L);
 		CourseInputDTO c1 = new CourseInputDTO(101,"name1","description1");
@@ -130,7 +130,7 @@ public class AssignFacultyServiceTest {
 	@Test
 	//@Disabled
 	public void deleteTest() throws Exception {
-		UserInputDTO userInDTO = new UserInputDTO(1L,"firstName1","lastName1","login1",
+		UserInputDTO userInDTO = new UserInputDTO(1L,"firstName1","lastName1","Login1",
 				"password1","password1",new SimpleDateFormat("yyyy-MM-dd").parse("1988-01-29T11:04:54.511Z"),
 				"mobileNo1","gender1","profilePic1",11L);
 		CourseInputDTO c1 = new CourseInputDTO(101,"name1","description1");
