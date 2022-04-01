@@ -7,8 +7,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.Disabled;
+import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.Test;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -20,7 +21,7 @@ import com.cg.ams.exception.DuplicateRecordException;
 import com.cg.ams.exception.RecordNotFoundException;
 
 @SpringBootTest
-@Disabled
+//@Disabled
 class StudentServiceTest {
 
 	@Autowired
@@ -58,14 +59,14 @@ class StudentServiceTest {
 
 	@Test
 	void findByName() {
-		List<StudentOutputDTO> students = studentService.findByName("Raj");
-		assertEquals(2, students.size());
+		List<StudentOutputDTO> students = studentService.findByName("Varsha");
+		assertEquals(1, students.size());
 	}
 
 	@Test
 	void searchTest() throws Exception {
-		List<StudentOutputDTO> students = studentService.search("Ray");
-		assertEquals(2, students.size());
+		List<StudentOutputDTO> students = studentService.search("Varsha");
+		assertEquals(1, students.size());
 	}
 
 	@Test
@@ -89,9 +90,9 @@ class StudentServiceTest {
 	}
 
 	@Test
-	void searchPageTest() {
-		List<StudentOutputDTO> students = studentService.search("Ra", 0, 3);
-		assertEquals(3, students.size());
+	void searchByPageTest() {
+		List<StudentOutputDTO> students = studentService.search("Varsha", 0, 3);
+		assertEquals(1, students.size());
 	}
 
 	@Test
@@ -104,10 +105,10 @@ class StudentServiceTest {
 		List<SubjectDTO> subList = new ArrayList<>();
 		subList.add(subDTO1);
 		subList.add(subDTO2);
-		StudentInputDTO afInDTO = new StudentInputDTO(1002, 1, "Varsha", "9876543210", "pic1.jpg", subList);
-		studentService.delete(afInDTO);
+		StudentInputDTO stdInDTO = new StudentInputDTO(1101, 1, "Varsha", "9876543210", "pic1.jpg", subList);
+		studentService.delete(stdInDTO);
 		assertThrows(RecordNotFoundException.class, () -> {
-			studentService.delete(afInDTO);
+			studentService.delete(stdInDTO);
 		});
 	}
 

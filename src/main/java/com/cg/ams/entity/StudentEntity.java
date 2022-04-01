@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
@@ -79,7 +80,7 @@ public class StudentEntity {
 	
 	
 	
-	@ManyToMany(cascade=CascadeType.MERGE)
+	@ManyToMany(fetch = FetchType.EAGER,cascade= {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH})
 	@JoinTable(
 	name = "student_subject",
 	joinColumns = { @JoinColumn(name = "std_id") },
